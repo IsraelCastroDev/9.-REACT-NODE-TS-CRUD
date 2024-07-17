@@ -4,6 +4,7 @@ import {
   createProduct,
   getProductById,
   getProducts,
+  updateAvailability,
   updateProduct,
 } from "./handlers/product";
 import { handleInputErrors } from "./middlewares";
@@ -50,9 +51,12 @@ router.put(
   updateProduct
 );
 
-router.patch("/", (req, res) => {
-  res.json("Desde patch");
-});
+router.patch(
+  "/:id",
+  param("id").isInt().withMessage("ID no válido"),
+  handleInputErrors,
+  updateAvailability
+);
 
 router.delete("/", (req, res) => {
   res.json("Desde delete");
