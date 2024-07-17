@@ -21,6 +21,9 @@ connection();
 // creamos el servidor
 const server = express();
 
+// habilitar lectura de json en la peticion
+server.use(express.json());
+
 // Routing
 server.use("/api/products", router);
 
