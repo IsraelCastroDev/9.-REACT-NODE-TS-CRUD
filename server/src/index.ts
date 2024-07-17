@@ -1,7 +1,8 @@
 import server from "./server";
+import colors from "colors";
 
-const port = 5000;
+const port = process.env.port || 4000;
 
 server.listen(port, () => {
-  console.log(`REST API listening on port ${port}`);
+  console.log(colors.bgBlue.white(`REST API listening on port ${port}`));
 });
