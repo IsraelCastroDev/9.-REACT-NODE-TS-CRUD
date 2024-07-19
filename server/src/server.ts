@@ -1,5 +1,6 @@
 import express from "express";
 import colors from "colors";
+import cors, { CorsOptions } from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger";
 import router from "./router";
@@ -22,6 +23,19 @@ connection();
 
 // creamos el servidor
 const server = express();
+
+// permitir conexiones
+const corsOptions: CorsOptions = {
+  origin: (origin, callback) => {
+    if (origin === process.env.FRONTEND_URL) {
+      callback(null, true); // error, permites la conexion? boolean
+    } else {
+      callback(new Error("Error de CORS"));
+    }
+  },
+};
+
+server.use(cors(corsOptions));
 
 // habilitar lectura de json en la peticion
 server.use(express.json());
