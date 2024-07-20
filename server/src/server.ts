@@ -1,6 +1,7 @@
 import express from "express";
 import colors from "colors";
 import cors, { CorsOptions } from "cors";
+import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger";
 import router from "./router";
@@ -39,6 +40,9 @@ server.use(cors(corsOptions));
 
 // habilitar lectura de json en la peticion
 server.use(express.json());
+
+// morgan - ver respuestas del servidor en consola
+server.use(morgan("dev"));
 
 // Routing
 server.use("/api/products", router);
